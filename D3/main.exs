@@ -15,7 +15,7 @@ defmodule AOC do
       end
 
     [head | tail] = lst |> Enum.map(&(String.graphemes(&1) |> MapSet.new()))
-    tail |> Enum.reduce(head, &MapSet.intersection(&1, &2)) |> MapSet.to_list |> hd
+    tail |> Enum.reduce(head, &MapSet.intersection(&1, &2)) |> MapSet.to_list() |> hd
   end
 
   def codepoints(lst), do: (lst ++ [0]) |> Enum.map(&sum_of_priorities(&1)) |> Enum.sum()
@@ -45,18 +45,20 @@ defmodule AOC do
     str
     |> String.split()
     |> Enum.map(&(split_in_half(&1) |> duplicated_occurencies))
-    |> Enum.join
+    |> Enum.join()
     |> to_charlist
     |> codepoints
     |> IO.puts()
   end
 
   def second_problem(str) do
+    IO.puts("Part 2")
+
     str
     |> String.split()
     |> takeN(3, [])
     |> Enum.map(&duplicated_occurencies/1)
-    |> Enum.join
+    |> Enum.join()
     |> to_charlist
     |> codepoints
     |> IO.puts()
