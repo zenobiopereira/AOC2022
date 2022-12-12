@@ -28,12 +28,12 @@ defmodule AOC do
     end
   end
 
-  def takeN(lst, n, acc) do
+  def take_recursive(lst, n, acc) do
     tail = lst |> Enum.drop(n)
     head = lst |> Enum.take(n)
 
     cond do
-      length(tail) > n -> takeN(tail, n, acc ++ [head])
+      length(tail) > n -> take_recursive(tail, n, acc ++ [head])
       length(tail) == n -> acc ++ [head] ++ [tail]
       true -> acc
     end
@@ -56,7 +56,7 @@ defmodule AOC do
 
     str
     |> String.split()
-    |> takeN(3, [])
+    |> take_recursive(3, [])
     |> Enum.map(&duplicated_occurencies/1)
     |> Enum.join()
     |> to_charlist
